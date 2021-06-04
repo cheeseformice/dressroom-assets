@@ -1,0 +1,38 @@
+name: Update dressroom assets
+
+on:
+  create:
+    tags:
+      - '*'
+
+jobs:
+  publish-assets:
+    name: Download and publish dressroom assets
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+
+      - name: Install ffdec
+        run: |
+          curl -L https://github.com/jindrapetrik/jpexs-decompiler/releases/download/version14.4.0/ffdec_14.4.0.deb > ./ffdec.deb
+          sudo apt-get install ./ffdec.deb
+
+      - name: Fetch assets
+        run: |
+          chmod +x ./fetch-assets.sh
+          ./fetch-assets.sh
+
+      - name: Pack assets
+        run: |
+          zip -r ./costumes.zip ./costumes
+          zip -r ./furs.zip ./furs
+
+      - name: Upload assets
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            ./costumes.zip
+            ./furs.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
