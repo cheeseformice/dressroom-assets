@@ -19,7 +19,7 @@ jobs:
 
       - name: Compile program
         run: |
-          gcc -Wall --std=c++17 ./check-version.cpp -o ./check-version.o -I${{ GITHUB_WORKSPACE }}/swflib/include -L${{ GITHUB_WORKSPACE }} -lswflib
+          gcc -Wall --std=c++17 ./check-version.cpp -o ./check-version.o -I${{ env.GITHUB_WORKSPACE }}/swflib/include -L${{ env.GITHUB_WORKSPACE }} -lswflib
           chmod +x ./check-version.o
 
       - name: Download SWF
