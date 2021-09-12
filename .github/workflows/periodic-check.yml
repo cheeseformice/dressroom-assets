@@ -13,10 +13,13 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@v2
 
-      - name: Compile program
+      - name: Install build-essential
         run: |
           sudo apt-get install -y build-essential
-          gcc -Wall --std=c++17 ./check-version.cpp -o ./check-version.o -I${{ github.workspace }}/swflib/include -L${{ github.workspace }} -lswflib
+
+      - name: Compile program
+        run: |
+          gcc -Wall --std=c++17 ./check-version.cpp -o ./check-version.o -I${{ GITHUB_WORKSPACE }}/swflib/include -L${{ GITHUB_WORKSPACE }} -lswflib
           chmod +x ./check-version.o
 
       - name: Download SWF
