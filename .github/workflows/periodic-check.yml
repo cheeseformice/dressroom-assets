@@ -1,0 +1,28 @@
+name: Check if tfm updated
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 15 * * *"
+
+jobs:
+  check-update:
+    name: Download SWF and check if the version changed
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+
+      - name: Compile program
+        run: |
+          sudo apt-get install -y build-essentials
+          gcc -Wall -g ./check-version.cpp -o ./check-version.o -I./swflib/include -lswflib
+          chmod +x ./check-version.o
+
+      - name: Download SWF
+        run: |
+          curl -L http://transformice.com/Transformice.swf > Transformice.swf
+
+      - name: Check if the game has been updated
+        run: |
+          ./check-version.o
