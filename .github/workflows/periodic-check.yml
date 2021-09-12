@@ -21,6 +21,10 @@ jobs:
         run: |
           echo workspace=$GITHUB_WORKSPACE >> $GITHUB_ENV
 
+      - name: Clone swflib's headers
+        run: |
+          git clone https://github.com/Athesdrake/swflib
+
       - name: Compile program
         run: |
           gcc -Wall --std=c++17 ./check-version.cpp -o ./check-version.o -I${{ env.workspace }}/swflib/include -L${{ env.workspace }} -lswflib
