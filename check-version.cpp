@@ -31,7 +31,8 @@ int main() {
   auto first_class = file->classes[0];
 
   for (auto trait : first_class.ctraits) {
-    if (trait.kind == swf::abc::TraitKind::Const) {
+    // Version is always the first static constant trait of the first class
+    if (trait.kind == swf::abc::TraitKind::Const && trait.slot.kind == 6) {
       cout << "Found game version: " << file->cpool.doubles[trait.index] << "\n";
       break;
     }
