@@ -32,7 +32,7 @@ int main() {
 
   for (auto trait : first_class.ctraits) {
     if (trait.kind == swf::abc::TraitKind::Const) {
-      cout << "Found game version: " << trait.toString() << "\n";
+      cout << "Found game version: " << file->cpool.doubles[trait.index] << "\n";
       break;
     }
   }
