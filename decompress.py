@@ -1,10 +1,10 @@
 import re
 import os
 import subprocess
-from typing import Optional
+from typing import List
 
 
-def exec_process(args: list[str], pipe: bool) -> bytes:
+def exec_process(args: List[str], pipe: bool) -> bytes:
 	kwargs = {}
 	if pipe:
 		kwargs = {
