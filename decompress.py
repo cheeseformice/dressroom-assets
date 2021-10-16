@@ -61,7 +61,7 @@ def decompress(fname: str):
 		)
 	}
 
-	exec_process(["swfbinexport", fname], False)
+	exec_process(["./swfbinexport", fname], False)
 
 	fname = os.path.splitext(fname)[0]
 	with open("./Transformice.swf", "wb") as swf:
