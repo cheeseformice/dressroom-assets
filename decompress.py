@@ -56,7 +56,8 @@ def decompress(fname: str):
 	binary_names = {
 		match.group(2): int(match.group(1))
 		for match in re.finditer(
-			rb'\s+exports (\d+) as "(?:.*?)_(.*?)"'
+			rb'\s+exports (\d+) as "(?:.*?)_(.*?)"',
+			swfdump
 		)
 	}
 
