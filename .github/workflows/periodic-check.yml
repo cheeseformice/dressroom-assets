@@ -13,6 +13,11 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@v2
 
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v1
+        with:
+          python-version: '3.7'
+
       - name: Install build-essential
         run: |
           sudo apt-get install -y build-essential
@@ -33,7 +38,11 @@ jobs:
 
       - name: Download SWF
         run: |
-          curl -L http://transformice.com/Transformice.swf > Transformice.swf
+          curl -L http://transformice.com/Transformice.swf > Transformice-compressed.swf
+
+      - name: Decompress SWF
+        run: |
+          python ./decompress.py
 
       - name: Check if the game has been updated
         run: |
