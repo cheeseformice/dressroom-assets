@@ -49,3 +49,18 @@ jobs:
       - name: Check if the game has been updated
         run: |
           ./check-version.o
+        id: check
+
+      - name: Get last release's version
+        run: |
+          python ./get-last.py
+        id: last
+
+      - name: Create tag and release
+        uses: softprops/action-gh-release@v1
+        if: steps.check.version != '-1' && steps.check.version != steps.last.version
+        with:
+          name: ${{ format('v1.{0}', steps.check.version) }}
+          tag_name: ${{ format('v1.{0}', steps.check.version) }}
+          draft: false
+          pre_release: false

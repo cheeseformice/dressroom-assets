@@ -22,7 +22,7 @@ int main() {
   swf->read(*stream);
 
   if (swf->abcfiles.count("frame1") == 0) {
-    cout << "Game is in maintenance\n";
+    cout << "::set-output name=version::-1\n";
     return 1;
   }
 
@@ -33,7 +33,7 @@ int main() {
   for (auto trait : first_class.ctraits) {
     // Version is always the first static constant trait of the first class
     if (trait.kind == swf::abc::TraitKind::Const && trait.slot.kind == 6) {
-      cout << "Found game version: " << file->cpool.doubles[trait.index] << "\n";
+      cout << "::set-output name=version::" << file->cpool.doubles[trait.index] << "\n";
       break;
     }
   }
