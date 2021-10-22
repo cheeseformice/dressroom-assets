@@ -58,13 +58,13 @@ jobs:
 
       - name: Print versions
         run: |
-          echo "Current version is v1.${{ steps.check.version }}, and last is v1.${{ steps.last.version }}"
+          echo "Current version is v1.${{ steps.check.outputs.version }}, and last is v1.${{ steps.last.outputs.version }}"
 
       - name: Create tag and release
         uses: softprops/action-gh-release@v1
-        if: steps.check.version != '-1' && steps.check.version != steps.last.version
+        if: steps.check.outputs.version != '-1' && steps.check.outputs.version != steps.last.outputs.version
         with:
-          name: ${{ format('v1.{0}', steps.check.version) }}
-          tag_name: ${{ format('v1.{0}', steps.check.version) }}
+          name: ${{ format('v1.{0}', steps.check.outputs.version) }}
+          tag_name: ${{ format('v1.{0}', steps.check.outputs.version) }}
           draft: false
           pre_release: false
