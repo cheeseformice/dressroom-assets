@@ -68,3 +68,4 @@ jobs:
           tag_name: ${{ format('v1.{0}', steps.check.outputs.version) }}
           draft: false
           pre_release: false
+          token: ${{ secrets.GH_PAT }}
