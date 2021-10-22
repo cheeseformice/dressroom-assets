@@ -56,6 +56,10 @@ jobs:
           python ./get-last.py
         id: last
 
+      - name: Print versions
+        run: |
+          echo "Current version is v1.${{ steps.check.version }}, and last is v1.${{ steps.last.version }}"
+
       - name: Create tag and release
         uses: softprops/action-gh-release@v1
         if: steps.check.version != '-1' && steps.check.version != steps.last.version
