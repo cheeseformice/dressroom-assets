@@ -1,6 +1,4 @@
-#!/bin/bash
-
-swfs=("x_meli_costumes" "x_fourrures")
+swfs=("costume" "x_meli_costumes" "x_fourrures")
 link="http://www.transformice.com/images/x_bibliotheques/"
 
 printf "Downloading swfs\n"
@@ -10,7 +8,7 @@ for swf in "${swfs[@]}"
 do
 	for (( c=1; 1>0; c++))
 	do
-		if [[ $c == "1" ]]
+		if [[ $c == "1" && $swf != "costume" ]]
 		then
 			file="$swf.swf"
 		else
