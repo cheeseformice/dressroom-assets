@@ -27,6 +27,7 @@ jobs:
         run: |
           zip -r ./costumes.zip ./costumes
           zip -r ./furs.zip ./furs
+          zip -r ./shaman.zip ./shaman
 
       - name: Upload assets
         uses: softprops/action-gh-release@v1
@@ -34,5 +35,6 @@ jobs:
           files: |
             ./costumes.zip
             ./furs.zip
+            ./shaman.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

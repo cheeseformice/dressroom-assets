@@ -1,4 +1,4 @@
-swfs=("costume" "x_meli_costumes" "x_fourrures")
+swfs=("costume" "x_meli_costumes" "x_fourrures" "x_items_chaman")
 link="http://www.transformice.com/images/x_bibliotheques/"
 
 printf "Downloading swfs\n"
@@ -30,9 +30,11 @@ printf "Exporting sprites\n"
 mkdir ./sprites
 mkdir ./furs
 mkdir ./costumes
+mkdir ./shaman
 
 costume="Costume_[0-9]+_"
 fur="_1_[0-9]+_1$"
+shaman="Objet_[0-9]"
 
 for swf in ./swfs/*
 do
@@ -43,17 +45,21 @@ do
 
 	for file in ./sprites/*
 	do
-	  if [[ $file =~ $costume ]]
-	  then
-	    mv $file "./costumes/$(basename -- $file)"
+		if [[ $file =~ $costume ]]
+		then
+			mv $file "./costumes/$(basename -- $file)"
 
-	  elif [[ $file =~ $fur ]]
-	  then
-	    mv $file "./furs/$(basename -- $file)"
+		elif [[ $file =~ $fur ]]
+		then
+			mv $file "./furs/$(basename -- $file)"
 
-	  else
-	    rm -rf $file
-	  fi
+		elif [[ $file =~ $shaman ]]
+		then
+			mv $file "./shaman/$(basename -- $file)"
+
+		else
+			rm -rf $file
+		fi
 	done
 done
 
